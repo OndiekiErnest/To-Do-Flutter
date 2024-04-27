@@ -209,7 +209,7 @@ class _TasksScreenState extends State<TasksScreen> {
                   child: Text(
                     'Categories',
                     style: TextStyle(
-                      color: Colors.black,
+                      color: Color.fromARGB(255, 122, 122, 122),
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
                     ),
