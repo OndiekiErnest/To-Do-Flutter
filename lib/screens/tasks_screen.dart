@@ -140,11 +140,18 @@ class _TasksScreenState extends State<TasksScreen> {
       setState(() {
         // insert new task between the last item whose isDone is false
         // and the the first item whose isDone is true
+        bool wasAdded = false; // flag to check if item was added in loop
         for (int i = 0; i < todosList.length; i++) {
           if (todosList[i].isDone) {
             todosList.insert(i, newTask);
+            // set flag to true
+            wasAdded = true;
             break;
           }
+        }
+        // insert new task at the end of the list if wasAdded is false
+        if (!wasAdded) {
+          todosList.add(newTask);
         }
         // todosList.add(newTask);
         _updateTasks(); // Update the displayed tasks list
