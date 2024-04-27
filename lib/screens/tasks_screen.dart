@@ -202,12 +202,19 @@ class _TasksScreenState extends State<TasksScreen> {
         elevation: 0,
         child: Column(
           children: [
-            const UserAccountsDrawerHeader(
-              currentAccountPicture: CircleAvatar(
-                backgroundImage: AssetImage("assets/user.png"),
-              ),
-              accountName: Text("Student"),
-              accountEmail: Text("student@gmail.com"),
+            const SizedBox(
+                height: 40,
+                child: Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Text(
+                    'Categories',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                )
             ),
             // Drawer menu items for different task categories
             ListTile(
