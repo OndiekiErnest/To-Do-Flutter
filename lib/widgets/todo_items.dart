@@ -5,13 +5,15 @@ class ToDoItem extends StatelessWidget {
   final ToDo todo; // The ToDo object associated with this item
   final Function(ToDo) onToDoChanged; // function for task status change
   final Function(String) onDeleteItem; // function for task deletion
+  final Function(ToDo) onToDoEdit; // function to edit task
 
   // constructor for the ToDoItem, takes required parameters
   const ToDoItem(
       {super.key,
       required this.todo,
       required this.onToDoChanged,
-      required this.onDeleteItem});
+      required this.onDeleteItem,
+      required this.onToDoEdit});
 
   @override
   Widget build(BuildContext context) {
@@ -46,17 +48,36 @@ class ToDoItem extends StatelessWidget {
               // Apply strikethrough decoration if task is completed
               decoration: todo.isDone ? TextDecoration.lineThrough : null),
         ),
-        trailing: IconButton(
-            onPressed: () {
-              // Invoke callback function when delete button is pressed, passing task ID
-              onDeleteItem(todo.id);
-            },
-            icon: const Icon(
-              Icons.delete,
-              size: 20,
-              // Set the delete icon color to white
-              color: Color.fromARGB(255, 205, 14, 0),
-            )),
+        trailing: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            IconButton(
+              onPressed: () {
+                // Invoke callback function when delete button is pressed, passing task ID
+                onToDoEdit(todo);
+              },
+              icon: const Icon(
+                Icons.edit,
+                size: 20,
+                // Set the delete icon color to white
+                color: Color.fromARGB(255, 7, 141, 0),
+              ),
+            ),
+            IconButton(
+              onPressed: () {
+                // Invoke callback function when delete button is pressed, passing task ID
+                onDeleteItem(todo.id);
+              },
+              icon: const Icon(
+                Icons.delete,
+                size: 20,
+                // Set the delete icon color to white
+                color: Color.fromARGB(255, 205, 14, 0),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

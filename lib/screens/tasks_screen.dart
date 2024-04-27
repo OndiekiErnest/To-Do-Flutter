@@ -62,6 +62,45 @@ class _TasksScreenState extends State<TasksScreen> {
     });
   }
 
+  // Method to handle task edit
+  void _handleToDoEdit(ToDo todo) {
+    setState(() {
+      // show popup for editing with text field initialized to todo text
+      // actions should be two buttons "Update" and "Cancel"
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          TextEditingController textController =
+              TextEditingController(text: todo.todoText);
+          return AlertDialog(
+            title: const Text("Edit Task"),
+            content: TextField(
+              autofocus: true,
+              controller: textController,
+            ),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: const Text("Cancel"),
+              ),
+              TextButton(
+                onPressed: () {
+                  todo.todoText = textController.text;
+                  // update to reflect change
+                  _updateTasks();
+                  Navigator.of(context).pop();
+                },
+                child: const Text("Update"),
+              ),
+            ],
+          );
+        },
+      );
+    });
+  }
+
   // Method to handle task deletion
   void _deleteToDoItem(String id) {
     setState(() {
@@ -275,6 +314,7 @@ class _TasksScreenState extends State<TasksScreen> {
                   todo: _foundToDo[index],
                   onToDoChanged: _handleToDoChange,
                   onDeleteItem: _deleteToDoItem,
+                  onToDoEdit: _handleToDoEdit,
                 ),
               ),
             ),
